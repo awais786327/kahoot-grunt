@@ -1,0 +1,151 @@
+<div ng-if="!game.data.state || game.data.state == 'preQuestion'" class="progress">
+	<div class="indeterminate"></div>
+</div>
+<div class="host-wrapper center">
+
+	<div class="row" ng-if="game.data.state == 'waitingForPlayers'">
+		<h2 class="main-heading">Join our game!</h2>
+		<p class="margin-bottom-40">
+		<div class="card">
+			<div class="card-content">
+				<span class="begin-button card-title activator grey-text text-darken-4">
+					<a href="javascript:" class="btn btn-success center center-align center-block hoverable z-depth-5" ng-click="startGame()">Let's begin!</a>
+					<i class="material-icons right">more_vert</i></span>
+			</div>
+			<div class="card-reveal">
+				<span class="card-title"><i class="material-icons right">close</i></span>
+				<div class="switch">
+					<label>
+						Show answers
+						<input type="checkbox">
+						<span class="lever"></span>
+					</label>
+				</div>
+			</div>
+		</div>
+		</p>
+		<ul class="collapsible popout" data-collapsible="accordion">
+			<li>
+				<div class="collapsible-header active">
+					<i class="material-icons">link</i>
+					<span class="easy-link truncate">
+						Go to this &nbsp;<b class="teal-text text-darken-4">link</b>&nbsp; on your smartphone
+					</span>
+				</div>
+				<div class="collapsible-body">
+					<h2 class="game-link">
+						<a class="teal-text text-darken-2" href="https://kahootclone.firebaseapp.com" target="_blank">kahootclone.firebaseapp.com</a>
+					</h2>
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">verified_user</i>pin-code</div>
+				<div class="collapsible-body">
+					<h2 ng-bind="game.$id"></h2>
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons"><i class="material-icons">tap_and_play</i></i>Who's here {{isUsers}}</div>
+				<div class="collapsible-body">
+					<h4 ng-if="!game.data.users" class="waiting grey-text text-darken-2">waiting for everyone else to join..</h4>
+					<ul id="staggered-test">
+						<!--<li ng-repeat="player in game.data.users">-->
+						<!--{{player.screen_name}}-->
+						<!--</li>-->
+						<ul class="collection">
+							<li ng-repeat="player in game.data.users" class="collection-item left-align">
+								<input type="checkbox" ng-checked="player.screen_name"/>
+								<label class="flow-text black-text" ng-bind="player.screen_name"></label>
+							</li>
+						</ul>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="row" ng-if="game.data.state == 'preQuestion'">
+		<!--<div class="jumbotron">-->
+		<h1 class="next-question-timer">Next question will be displayed in <br> {{countdown}} seconds.. </h1>
+		<!--</div>-->
+	</div>
+
+	<div class="row question-area" ng-if="game.data.state == 'question'">
+		<div class="col s12">
+            <h1>{{currentQuestion.q}}</h1>
+            <h3>{{countdown}} seconds left..</h3>
+            <div class="divider"></div>
+            <ul class="collection" ng-repeat="answer in answers">
+                <li class="answers collection-item left-align"><span><i class="material-icons">send</i>&nbsp;</span> {{answer}}</li>
+            </ul>
+        </div>
+    </div>
+
+	<div class="row" ng-if="game.data.state == 'postQuestion'">
+		<div class="col s12 center-align">
+			<h3 class="correct-answer"><i class="material-icons">done_all</i> correct answer<br/><b>{{currentQuestion.answer}}</b></h3>
+			<div>
+				<button ng-if="game.data.currentQuestion != game.data.questions.length - 1"
+						class="btn red pulse" ng-click="nextQuestion()">Next Question</button>
+				<button ng-if="game.data.currentQuestion == game.data.questions.length - 1"
+						class="btn btn-success hoverable" ng-click="endGame()">End Game</button>
+			</div>
+            <div class="divider"></div>
+            <div ng-if="!correct.length">
+                <h4 class="waiting grey-text text-darken-2">Nobody given correct answer</h4>
+            </div>
+            <div ng-if="correct.length">
+                <div class="chip tooltipped" data-position="top" data-delay="50" data-tooltip="correct answer given"
+					 ng-repeat="user in correct">
+					<span ng-bind="user"></span>
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="row" ng-if="game.data.state == 'leaderboard'">
+		<div class="col s12">
+			<h1 class="leaderboard">Leaderboard</h1>
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in leaderboard | orderBy:'currentPoints'">
+                        <!--<td>{{$index+1}}</td>-->
+                        <td>{{user.screen_name}}</td>
+                        <td>{{user.current_points || '-'}}</td>
+                    </tr>
+                    <tr ng-if="leaderboard.length == 0">
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                    </tr>
+                    <tr ng-if="leaderboard.length == 0">
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                    </tr>
+                    <tr ng-if="leaderboard.length == 0">
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                        <td>
+                            <div class="card-panel grey lighten-3"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+</div>

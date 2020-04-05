@@ -1,0 +1,162 @@
+.host-wrapper {
+  .card {
+    .card-title {
+      margin-bottom: 0
+    }
+    .switch {
+      margin-top: 7px;
+      padding-left: 3.8em;
+    }
+    .begin-button {
+      padding-left: 1.5em;
+    }
+    .material-icons {
+      line-height: 1.5 !important;
+    }
+  }
+  .answers {
+    line-height: 1.5;
+    font-size: 2em;
+  }
+  .question-area {
+    h1 {
+      word-break: break-all;
+    }
+  }
+  .flow-text {
+    font-size: 1.2em !important;
+  }
+  .game-link {
+    font-size: 2.8em;
+  }
+  .card-panel {
+    width: 20%;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 0 auto;
+  }
+  .correct-answer {
+    i {
+      font-size: 1em;
+    }
+    b {
+      word-break: break-all;
+    }
+    margin: 4em 0 1em;
+  }
+  .divider {
+    margin: 2em 0;
+  }
+  .main-heading {
+    margin: 50px 0;
+  }
+  .play-btn {
+    a {
+      margin: 20px 0 0 0;
+    }
+  }
+  .next-question-timer {
+    font-size: 3em;
+    margin: 5.5em 0 0 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    padding: 0 1em;
+    left: 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .answers {
+    font-size: 1.5em !important;
+    padding: 5px 20px 6px !important;
+    span {
+      position: relative;
+      top: 5px;
+    }
+  }
+  .question-area {
+    h1 {
+      font-size: 3em !important;
+    }
+    h3 {
+      font-size: 2em !important;
+    }
+  }
+  .game-link {
+    font-size: 2.8em !important;
+  }
+  .leaderboard {
+    font-size: 3em;
+  }
+  .next-question-timer {
+    font-size: 2em !important;
+    margin: 9em 0 0 0 !important;
+  }
+}
+
+@media (max-width: 750px) {
+  .game-link {
+    font-size: 2.5em !important;
+  }
+  .card-panel {
+    width: 30% !important;
+  }
+  .waiting {
+    font-size: x-large;
+  }
+}
+
+@media (max-width: 600px) {
+  .question-area {
+    h1 {
+      font-size: 2em !important;
+      line-height: 34px;
+    }
+    h3 {
+      font-size: 1.5em !important;
+    }
+  }
+  .game-link {
+    font-size: 2em !important;
+  }
+  .card-panel {
+    border-radius: 13px !important;
+  }
+  .collapsible-body {
+    padding: 0.5em;
+    h2 {
+      font-size: 2.5em;
+    }
+  }
+  .leaderboard {
+    font-size: 2.5em;
+  }
+  .correct-answer {
+    font-size: 2.3em;
+  }
+  .next-question-timer {
+    padding: 0 !important;
+  }
+  .waiting {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 450px) {
+  .game-link {
+    font-size: 1.5em !important;
+  }
+  .card-panel {
+    width: 40% !important;
+  }
+  .waiting {
+    font-size: medium;
+  }
+  .main-heading {
+    font-size: 3em;
+  }
+  .carousel {
+    height: 380px !important;
+  }
+}

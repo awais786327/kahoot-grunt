@@ -1,0 +1,186 @@
+<!--<div ng-if="creatingGame" class="progress">-->
+    <!--<div class="indeterminate"></div>-->
+<!--</div>-->
+<div class="targetContentWrapper">
+    <!-- Element Showed -->
+    <a id="target" ng-click="openTarget()" class="waves-effect waves-light black-text left"><i class="material-icons btn-lg">menu</i></a>
+
+    <!-- Tap Target Structure -->
+    <div class="tap-target waves-effect waves-light" data-activates="target">
+        <div class="tap-target-content white-text">
+            <h5 class="center">Setting's <sup><i class="material-icons tiny">settings</i></sup></h5>
+            <div class="divider z-depth-5"></div>
+            <p class="items menu-links">
+                <a data-target="QuestionModal" class="white-text cursor hoverable modal-trigger">Update questions</a><br>
+                <!-- Bottom Modal Trigger -->
+                <a data-target="BottomModal" class="white-text cursor hoverable modal-trigger">View existing</a><br>
+            </p>
+            <p ng-if="hasAccess" class="items download">
+                <a data-balloon-visible data-balloon="download" data-balloon-pos="up" class="white-text cursor hoverable">
+                    <i class="material-icons">school</i>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="main-wrapper jumbotron center">
+    <h2 class="main-heading">Let's play trivia.</h2>
+    <div class="carousel">
+        <div class="carousel-item black white-text" href="javascript:">
+            <h2><span>7</span> seconds</h2>
+        </div>
+        <div class="carousel-item black white-text" href="javascript:">
+            <h2><span>15</span> question</h2>
+        </div>
+        <div class="carousel-item black white-text" href="javascript:">
+            <h2><span>4</span> options</h2>
+        </div>
+        <div class="carousel-item black white-text" href="javascript:">
+            <h2><span>10</span> minutes</h2>
+        </div>
+        <div class="carousel-item black white-text" href="javascript:">
+            <h2><span>1</span> answer</h2>
+        </div>
+    </div>
+    <div ng-if="!creatingGame"><a class="btn btn-lg btn-large btn-success hoverable" ng-click="newGame()">Start new Game</a></div>
+    <div ng-if="creatingGame" class="specific-height">
+        <!--<a ng-disabled="true" class="btn btn-lg btn-success text-darken-1 pulse">Creating game...</a>-->
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div><a class="btn waves-effect white grey-text btn-large darken-text-4 hoverable z-depth-5" ng-href="#/player">Join Existing Game</a></div>
+</div>
+
+<div class="modal-wrapper">
+    <div class="alert-modal">
+        <!-- Question Modal Structure -->
+        <div id="QuestionModal" class="modal modal-fixed-footer">
+            <div ng-if="!hasAccess" class="container center">
+                <form>
+                    <div ng-if="verifying" class="progress blue">
+                        <div class="indeterminate"></div>
+                    </div>
+                    <div ng-if="verifying" class="verify-question-modal">
+                        <span class="grey-text">please wait..</span>
+                    </div>
+                    <div ng-hide="verifying" class="verify-question-modal">
+                        <input id="verify" class="center" type="password" ng-model="verificationCode" data-length="6"
+                               ng-change="verificationCode.length >= 6 && verify(verificationCode)"
+                               placeholder="Verify 6 digit Code" >
+                    </div>
+                </form>
+            </div>
+            <div ng-if="hasAccess">
+                <form name="saveQuestionForm">
+                    <div class="modal-content">
+                        <h5>Create quiz.</h5>
+                        <p class="grey-text">Select an option after adding options <sup class="green-text">correct answer</sup></p>
+                        <div class="margin-bottom-20">
+                            <form role="form" class="form-control">
+                                <div class="col 12">
+                                    <div class="input-field center">
+                                        <input id="enter_question" required ng-model="question.value" type="text" class="validate">
+                                        <label for="enter_question">Enter Question</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s7" data-balloon="use 4 options" data-balloon-pos="right">
+                                        <div required class="chips set-options"></div>
+                                    </div>
+                                </div>
+                                <a class="btn-floating add-question waves-effect waves-light red" ng-click="addQuestion(question)"><i class="material-icons">add</i></a>
+                            </form>
+                        </div>
+                        <!--<ul id="sortable" class="collection">-->
+                        <ul class="collection">
+                            <li ng-repeat="quiz in customQuiz track by $index" class="collection-item hoverable dismissable">
+                                <span data-balloon="click to change option" data-balloon-pos="right">
+                                    <i class="material-icons left">info</i>
+                                </span>
+                                <span class="hide-on-small-only cursor white-text grey badge"
+                                      ng-repeat="option in quiz.wrong_answers track by $index"
+                                      ng-bind="option"
+                                      ng-click="changeCorrectOption($parent.$index, option, $index)"></span>
+                                <span class="hide-on-small-only white-text teal badge"
+                                  data-balloon="correct answer" data-balloon-pos="right"
+                                  ng-bind="quiz.answer"></span>
+                                <b class="hide-on-small-only">Q:</b>
+                                <span class="truncate" ng-bind="quiz.q"></span>
+                                <div class="hide-on-med-and-up">
+                                    <div class="input-field">
+                                        <select>
+                                            <option selected ng-bind="quiz.answer"></option>
+                                            <option ng-repeat="option in quiz.wrong_answers track by $index"
+                                                    ng-bind="option"
+                                                    ng-click="changeCorrectOption($parent.$index, option, $index)">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="saveChanges()"
+                                class="modal-action modal-close waves-effect waves-green btn-flat">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-modal">
+        <!-- Bottom Modal Structure -->
+        <div id="BottomModal" class="modal bottom-sheet center">
+            <div ng-if="!hasAccess" class="margin-top-10">
+                <div class="modal-content padding-top-20 padding-bottom-20">
+                    <form>
+                        <div ng-hide="verifying" class="margin-bottom-10">
+                            <input id="verify" class="center" type="password" ng-model="verificationCode" data-length="6"
+                                   ng-change="verificationCode.length >= 6 && verify(verificationCode)"
+                                   placeholder="Verify 6 digit Code" >
+                        </div>
+                        <div ng-if="verifying" class="specific-height">
+                            <!--<a ng-disabled="true" class="btn btn-lg btn-success text-darken-1 pulse">Creating game...</a>-->
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div ng-if="hasAccess" class="margin-top-20">
+                <div class="modal-header truncate">
+                    <h5>Question & Answer</h5>
+                </div>
+                <div class="modal-content">
+                    <div ng-repeat="quiz in customQuiz">
+                        <h5 ng-bind="quiz.q"></h5>
+                        <p>
+                            <div ng-bind="quiz.answer" class="view-chip blue-text">option 2</div>
+                            <div class="view-chip" ng-repeat="option in quiz.wrong_answers track by $index"
+                                 ng-bind="option"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

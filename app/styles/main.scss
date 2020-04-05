@@ -1,0 +1,17 @@
+/*
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+// endbower
+*/
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+// for tooltip
+@import url('https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css');
+
+@import "general";
+@import "progress-bar";
+@import "home";
+@import "host";
+@import "player";
+@import "modal";

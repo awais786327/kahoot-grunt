@@ -1,0 +1,121 @@
+body {
+  overflow: hidden;
+}
+
+.cursor {
+  cursor: pointer !important;
+}
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.margin-top-30 {
+  margin-top: 30px;
+}
+.margin-top-40 {
+  margin-top: 40px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px !important;
+}
+.margin-bottom-20 {
+  margin-bottom: 20px !important;
+}
+.margin-bottom-30 {
+  margin-bottom: 30px !important;
+}
+.margin-bottom-40 {
+  margin-bottom: 40px !important;
+}
+
+.padding-top-10 {
+  padding-top: 10px;
+}
+.padding-top-20 {
+  padding-top: 20px !important;
+}
+.padding-top-30 {
+  padding-top: 30px;
+}
+.padding-top-40 {
+  padding-top: 40px;
+}
+
+.padding-bottom-10 {
+  padding-bottom: 10px !important;
+}
+.padding-bottom-20 {
+  padding-bottom: 20px !important;
+}
+.padding-bottom-30 {
+  padding-bottom: 30px !important;
+}
+.padding-bottom-40 {
+  padding-bottom: 40px !important;
+}
+
+.targetContentWrapper {
+  #target {
+    position: absolute;
+    left: 13px;
+    top: 8px;
+  }
+  .material-icons {
+    padding: 4px 0 0 0;
+  }
+  .tap-target {
+    background: #134E5E;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    .items {
+      a {
+        padding: 2px 5px 2px;
+        &:hover {
+          //font-size: 16px;
+        }
+      }
+    }
+  }
+  .download {
+    position: absolute;
+    bottom: 0;
+    a {
+      padding: 0 5px !important;
+      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+  .menu-links {
+    a {
+      display: inline-block;
+    }
+  }
+}
+
+#QuestionModal {
+  .chips {
+    .chip {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .add-question {
+    margin-top: -20px;
+  }
+  .collection {
+    border-radius: 0;
+    position: absolute;
+    margin: 0 2px;
+    right: 0;
+    left: 0;
+  }
+}
